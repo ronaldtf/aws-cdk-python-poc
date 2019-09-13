@@ -80,9 +80,10 @@ $ cdk deploy
 
 ## Other useful commands
 
- * `cdk ls`          list all stacks in the app
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
+ * `cdk ls`: List all stacks in the app
+ * `cdk destroy`: Destroyed the stack deployed
+ * `cdk diff`: Compare deployed stack with current state
+ * `cdk docs`: Open CDK documentation
 
 
 # Structure

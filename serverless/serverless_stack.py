@@ -1,10 +1,10 @@
 import jsii
 from aws_cdk import core
-from custom_s3 import MyBucketDefinition
+from lib.custom_s3 import MyBucketDefinition
 
 def getProperties():
 
-    properties = dict(line.strip().split('=') for line in open('serverless/config.properties') if not line.strip().startswith('#'))
+    properties = dict(line.strip().split('=') for line in open('serverless/config/config.properties') if not line.strip().startswith('#'))
     return properties
         
 

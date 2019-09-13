@@ -1,4 +1,6 @@
-# Goal
+<!-- ![alt text](http://image.png) -->
+
+# The Project
 This project uses the [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/home.html), an Amazon Toolkit to define IaC (Infrastructure as Code) by using some of the most common languages. AWS CDK converts the implemented code to CloudFormation (which uses an AWS syntax to describe and provision all the infrastructure resources in AWS).
 
 Most of the documentation about AWS CDK is focused on typescript. As *Python* is one of the most used languages, we have opted to use the Python CDK SDK. This project will be helpful for other projects implemented in Python.

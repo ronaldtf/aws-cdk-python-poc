@@ -18,11 +18,11 @@ The goal is define a simple infrastructure we can use in other projects as well 
 Even if we have opted for a serverless infrastructure, the project can be easily adapted to a non-serverless architecture. 
 
 
-# Installation
+## Installation
 
 We show below not only the commands needed to deploy this project but also additional instructions to start a project from stratch.
 
-## Create a project from scratch
+### Create a project from scratch
 In order to create a project from scratch, use the following command:
 ```
 $ cdk init --language python app
@@ -32,7 +32,7 @@ Install python libraries:
 $ pip install -r requirements.txt
 ```
 
-## Set up
+### Set up
 
 This project is set up like a standard Python project. 
 
@@ -62,7 +62,7 @@ Once the virtualenv is activated, you can install the required dependencies.
 $ pip install -r requirements.txt
 ```
 
-## Generate CloudFormation templates
+### Generate CloudFormation templates
 
 You can synthesize the CloudFormation template for this code.
 
@@ -70,7 +70,7 @@ You can synthesize the CloudFormation template for this code.
 $ cdk synth
 ```
 
-## Deploy Stack
+### Deploy Stack
 
 As shown in [this page](https://cdkworkshop.com/30-python/20-create-project/500-deploy.html), the first time you deploy an AWS CDK app into an environment (account/region), you’ll need to install a `bootstrap stack`. This stack includes resources that are needed for the toolkit’s operation. For example, the stack includes an S3 bucket that is used to store templates and assets during the deployment process.
 
@@ -84,7 +84,7 @@ To deploy the infrastructure in AWS, once the templates have been generated, use
 $ cdk deploy
 ```
 
-## Other useful commands
+### Other useful commands
 
  * `cdk ls`: List all stacks in the app
  * `cdk destroy`: Destroyed the stack deployed
@@ -92,7 +92,7 @@ $ cdk deploy
  * `cdk docs`: Open CDK documentation
 
 
-# Structure
+## Structure
 
 The relevant files for this project as the following:
 

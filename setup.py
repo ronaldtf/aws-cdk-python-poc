@@ -13,7 +13,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
 
-    author="Ronald Teijeira Fernandez",
+    author="Ronald T. Fernandez (Ronald Teijeira Fernandez)",
 
     package_dir={"": "serverless"},
     packages=setuptools.find_packages(where="serverless"),

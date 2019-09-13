@@ -4,13 +4,12 @@ __email__ = 'ronaldtfernandez@gmail.com'
 __version__ = '1.0'
 __date__ = 'September 2019'
 
-import typing
 from aws_cdk import (
     aws_s3 as s3,
     aws_kms,
     core
 )
-
+import typing
 from aws_cdk.core import IAspect, IConstruct
 import jsii
 

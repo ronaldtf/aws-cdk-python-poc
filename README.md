@@ -5,16 +5,20 @@ This project uses the [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/hom
 
 Most of the documentation about AWS CDK is focused on typescript. As *Python* is one of the most used languages, we have opted to use the Python CDK SDK. This project will be helpful for other projects implemented in Python.
 
-In this project we have focused on the deployment of a simple serverless infrastructure. It deploys the following AWS services:
+## Description
+
+In this project we have implemented a project that uses AWS CDK to deploy a simple AWS serverless infrastructure. It deploys the following AWS services:
 * API Gateway
 * Lambda
 * DynamoDB
 * S3
 
-The goal is not only deploying a simple infrastructure we can use in other projects but also using specific aspects not necessarily need in this project but might be useful in other more complex projects or with a specific purpose. Even if we have opted for a serverless infrastructure, the project can be easily adapted to a non-serverless architecture. 
+The goal is define a simple infrastructure we can use in other projects as well as introduce specific aspects (which might not necessarily be needed in this project but might be useful in other more complex projects or with a specific purpose). 
+
+Even if we have opted for a serverless infrastructure, the project can be easily adapted to a non-serverless architecture. 
 
 
-# Howto
+# Installation
 
 We show below not only the commands needed to deploy this project but also additional instructions to start a project from stratch.
 

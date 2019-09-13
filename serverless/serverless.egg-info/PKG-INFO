@@ -1,11 +1,16 @@
 Metadata-Version: 2.1
 Name: serverless
 Version: 0.0.1
-Summary: An empty CDK Python app
+Summary: Serverless Application for a PoC to test CDK
 Home-page: UNKNOWN
-Author: author
+Author: Ronald Teijeira Fernandez
 License: UNKNOWN
-Description: 
+Description: In order to create a project from scratch, use the following syntax:
+        $ cdk init --language python app
+        $ pip install -r requirements.txt
+        
+        
+        
         # Welcome to your CDK Python project!
         
         This is a blank project for Python development with CDK.

@@ -1,3 +1,8 @@
+In order to create a project from scratch, use the following syntax:
+$ cdk init --language python app
+$ pip install -r requirements.txt
+
+
 
 # Welcome to your CDK Python project!
 

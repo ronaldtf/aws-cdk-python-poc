@@ -9,17 +9,19 @@ setuptools.setup(
     name="serverless",
     version="0.0.1",
 
-    description="An empty CDK Python app",
+    description="Serverless Application for a PoC to test CDK",
     long_description=long_description,
     long_description_content_type="text/markdown",
 
-    author="author",
+    author="Ronald Teijeira Fernandez",
 
     package_dir={"": "serverless"},
     packages=setuptools.find_packages(where="serverless"),
 
     install_requires=[
         "aws-cdk.core",
+        "aws-cdk.aws-s3",
+        "jsii"
     ],
 
     python_requires=">=3.6",

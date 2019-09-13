@@ -5,6 +5,7 @@ __date__ = 'September 2019'
 
 from aws_cdk import core
 from lib.custom_s3 import MyBucketDefinition
+from lib.custom_apigateway import MyAPIGateway
 
 ## This is a class to retrieve parameter values from configuration file
 class Parameters:
@@ -24,12 +25,17 @@ class ServerlessStack(core.Stack):
 
         # Get parameters
         parameters = Parameters.get_parameters()
-        bucket_name = parameters['BucketName']
+        prefix = parameters['Prefix']
+        bucket_name = prefix + parameters['BucketName']
+        apigateway_name = prefix + parameters['ApiGatewayName']
 
         # Create S3 bucket
         bucket = MyBucketDefinition(self, id=bucket_name, bucket_name=bucket_name, versioned=False)
         bucket.add_cors_rule(
-            allowed_origins=['*'],
+            allowed_origins=[],
             allowed_methods=[]
         )
+        
+        apigateway = MyAPIGateway(self, id=apigateway_name)
+        
 

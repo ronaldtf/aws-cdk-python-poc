@@ -19,9 +19,7 @@ setuptools.setup(
     packages=setuptools.find_packages(where="serverless"),
 
     install_requires=[
-        "aws-cdk.core",
-        "aws-cdk.aws-s3",
-        "jsii"
+        "aws-cdk.core"
     ],
 
     python_requires=">=3.6",

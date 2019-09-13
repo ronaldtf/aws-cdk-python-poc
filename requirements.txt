@@ -1,1 +1,5 @@
 -e .
+aws-cdk.aws_apigateway
+aws-cdk.aws_lambda
+aws-cdk.aws-s3
+jsii

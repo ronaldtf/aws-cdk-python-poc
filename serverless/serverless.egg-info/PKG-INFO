@@ -106,8 +106,8 @@ Description: <!-- ![alt text](http://image.png) -->
         * `app.py`: The main for the application
         * `cdk.json`: A configuration file that defines how to execute the application.
         * `README.md`: This README file.
-        * `requirements.txt`: It tells pip to install the requirements specified in setup.py.
-        * `setup.py`: It defines how the package is constructed and its dependencies.
+        * `requirements.txt`: Dependencies needed for the project.
+        * `setup.py`: It defines how the package is constructed .
         * `cdk.out/*`: When `cdk synth` is executed, CloudFormation templates are placed under this directory. Those files are used for deploying the insfrastrure with `cdk deploy` 
         * `serverless/*`: The project itself, where source code is placed.
             * `serverless/params/*`: Configuration file, where we define the infrastructure parameters

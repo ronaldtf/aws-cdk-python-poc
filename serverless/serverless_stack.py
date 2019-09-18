@@ -4,8 +4,9 @@ __version__ = '1.0'
 __date__ = 'September 2019'
 
 from aws_cdk import core
-from lib.custom_s3 import MyBucketDefinition
-from lib.custom_apigateway import MyAPIGateway
+from lib.custom_s3 import custom_s3
+from lib.custom_apigateway import custom_apigateway
+from lib.custom_dynamodb import custom_dynamodb
 
 ## This is a class to retrieve parameter values from configuration file
 class Parameters:
@@ -28,14 +29,17 @@ class ServerlessStack(core.Stack):
         prefix = parameters['Prefix']
         bucket_name = prefix + parameters['BucketName']
         apigateway_name = prefix + parameters['ApiGatewayName']
+        table_name = prefix + parameters['DBTableName']
+        partition_key = prefix + parameters['DBTablePartitionKey']
+        sort_key = None if parameters['DBTableSortKey'] == '' else prefix + parameters['DBTableSortKey']
 
         # Create S3 bucket
-        bucket = MyBucketDefinition(self, id=bucket_name, bucket_name=bucket_name, versioned=False)
+        bucket = custom_s3(self, id=bucket_name, bucket_name=bucket_name, versioned=False)
         bucket.add_cors_rule(
             allowed_origins=[],
             allowed_methods=[]
         )
         
-        apigateway = MyAPIGateway(self, id=apigateway_name)
-        
+        apigateway = custom_apigateway(self, id=apigateway_name)
+        dbtable = custom_dynamodb(stack=self, table_name=table_name, partition_key=partition_key, sort_key=sort_key)
 

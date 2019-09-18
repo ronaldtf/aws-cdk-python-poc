@@ -16,7 +16,7 @@ import jsii
 
 # CDK Constructor to create a custom implementation of a Bucket.
 # The behavior is the same as s3.Bucket except that buckets with numbers are forbidden.
-class MyAPIGateway(aws_apigateway.RestApi):
+class custom_apigateway(aws_apigateway.RestApi):
     def __init__(self, scope: core.Construct, id: str, *, cloud_watch_role: typing.Optional[bool]=None, deploy: typing.Optional[bool]=None, deploy_options: typing.Optional["StageOptions"]=None, description: typing.Optional[str]=None, endpoint_types: typing.Optional[typing.List["EndpointType"]]=None, fail_on_warnings: typing.Optional[bool]=None, parameters: typing.Optional[typing.Mapping[str,str]]=None, policy: typing.Optional[aws_iam.PolicyDocument]=None, rest_api_name: typing.Optional[str]=None, default_integration: typing.Optional["Integration"]=None, default_method_options: typing.Optional["MethodOptions"]=None) -> None:
         super().__init__(scope = scope, id=id, cloud_watch_role = cloud_watch_role, deploy = deploy, deploy_options=deploy_options, description=description, endpoint_types=endpoint_types, fail_on_warnings=fail_on_warnings, parameters=parameters, policy=policy, rest_api_name=rest_api_name, default_integration=default_integration, default_method_options=default_method_options)
         
@@ -59,15 +59,15 @@ class MyAPIGateway(aws_apigateway.RestApi):
         integration_res2 = aws_apigateway.LambdaIntegration(lambda2, proxy=False, integration_responses=integration_responses, passthrough_behavior=aws_apigateway.PassthroughBehavior.NEVER, request_templates=request_templates)
         res2.add_method('GET', integration_res2, method_responses=method_responses)
 
-        self.node.apply_aspect(ApiGatewayRestrictions(type(self)))
+        self.node.apply_aspect(api_gateway_restrictions(type(self)))
 
 
 # CDK Aspect for API Gateway Restrictions
 @jsii.implements(IAspect)
-class ApiGatewayRestrictions():
+class api_gateway_restrictions():
     def __init__(self, type):
         self._type = type
     def visit(self, node: IConstruct) -> None:
-        if self._type is aws_apigateway.RestApi or self._type is MyAPIGateway:
+        if self._type is aws_apigateway.RestApi or self._type is custom_apigateway:
             return
             # TODO

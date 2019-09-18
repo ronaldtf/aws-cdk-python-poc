@@ -1,4 +1,5 @@
 .env
+.vscode
 cdk.out
 **/__pycache__
 

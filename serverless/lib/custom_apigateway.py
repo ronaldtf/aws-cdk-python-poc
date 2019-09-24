@@ -21,10 +21,10 @@ class custom_apigateway(aws_apigateway.RestApi):
         super().__init__(scope = scope, id=id, cloud_watch_role = cloud_watch_role, deploy = deploy, deploy_options=deploy_options, description=description, endpoint_types=endpoint_types, fail_on_warnings=fail_on_warnings, parameters=parameters, policy=policy, rest_api_name=rest_api_name, default_integration=default_integration, default_method_options=default_method_options)
         
         # Define lambdas to be integrated in API
-        lambda1 = aws_lambda.Function(self, 'lambda1', code = aws_lambda.InlineCode(open('serverless/lambdas/lambda1.py', encoding="utf-8").read()), handler= 'handler', timeout = core.Duration.seconds(30), runtime = aws_lambda.Runtime.PYTHON_3_7, environment=[])
+        lambda1 = aws_lambda.Function(self, 'lambda1', code = aws_lambda.InlineCode(open('serverless/lambdas/lambda1.py', encoding="utf-8").read()), handler= 'index.handler', timeout = core.Duration.seconds(30), runtime = aws_lambda.Runtime.PYTHON_3_7, environment=[])
         lambda1.Permission = aws_lambda.Permission(principal= aws_iam.ServicePrincipal('apigateway.amazonaws.com'), action='dynamodb:*') 
 
-        lambda2 = aws_lambda.Function(self, 'lambda2', code = aws_lambda.InlineCode(open('serverless/lambdas/lambda2.py', encoding="utf-8").read()), handler= 'handler', timeout = core.Duration.seconds(30), runtime = aws_lambda.Runtime.PYTHON_3_7, environment=[])
+        lambda2 = aws_lambda.Function(self, 'lambda2', code = aws_lambda.InlineCode(open('serverless/lambdas/lambda2.py', encoding="utf-8").read()), handler= 'index.handler', timeout = core.Duration.seconds(30), runtime = aws_lambda.Runtime.PYTHON_3_7, environment=[])
         lambda2.Permission = aws_lambda.Permission(principal= aws_iam.ServicePrincipal('apigateway.amazonaws.com'), action='dynamodb:*') 
 
         # Common API Gateway options

@@ -74,15 +74,47 @@ $ cdk synth
 
 As shown in [this page](https://cdkworkshop.com/30-python/20-create-project/500-deploy.html), the first time you deploy an AWS CDK app into an environment (account/region), you’ll need to install a `bootstrap stack`. This stack includes resources that are needed for the toolkit’s operation. For example, the stack includes an S3 bucket that is used to store templates and assets during the deployment process.
 
+0. Verify you have correctly configured your ~/.aws/credentials and ~/.aws/config files.
+
+  NOTE: In case  you need to assume a role in another account, you must follow the following procedure:
+  * 0.1 Install the aws-mfa tool
+```
+$ pip install aws-mfa
+```
+
+  * 0.2 Define a profile (e.g. cdk) and update your ~/.aws/config file by including the profile options
+```
+[profile default]
+...
+
+[profile cdk]
+region = eu-west-1
+output = json
+```
+
+  * 0.3 Update your credentials file, by creating a tag profile by appending 'long-term' to the profile name:
+```
+[cdk-long-term]
+aws_access_key_id = YOURACCESSKEYID
+aws_secret_access_key = YOURSECRETACCESSKEY
+```
+
+  * 0.4 Run the aws-mfa command to set the credentials with the profile
+```
+aws-mfa --duration 1800 --device arn:aws:iam::<source_account_id>:mfa/<username> --profile <profile-e.g.-cdk> --assume-role arn:aws:iam::<target_account>:role/<role-to-be-assumed> --role-session-name <a-session-name>
+```
+
+1. Bootstrap the environment  
 ```
 $ cdk bootstrap
 ```
 
-To deploy the infrastructure in AWS, once the templates have been generated, use the following command:
-
+2. Run the deployment
 ```
 $ cdk deploy
 ```
+
+NOTE: You must execute ```cdk synth```  every time before doing the deployment in order to have the CloudFormation generated scripts updated.
 
 ### Other useful commands
 

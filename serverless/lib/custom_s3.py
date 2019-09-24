@@ -22,6 +22,8 @@ class custom_s3(s3.Bucket):
 
     self.node.apply_aspect(forbid_bucket_with_numbers(bucket_name, type(self)))
 
+    self.add_cors_rule(allowed_methods=[s3.HttpMethods.GET], allowed_origins=['*'])
+
 
 # CDK Aspect to forbids buckets with numbers
 @jsii.implements(IAspect)

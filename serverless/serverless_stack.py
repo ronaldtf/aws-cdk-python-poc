@@ -7,6 +7,8 @@ from aws_cdk import core
 from lib.custom_s3 import custom_s3
 from lib.custom_apigateway import custom_apigateway
 from lib.custom_dynamodb import custom_dynamodb
+from lib.custom_sns import custom_sns
+from lib.custom_lambda_snstarget import custom_lambda_snstarget
 
 ## This is a class to retrieve parameter values from configuration file
 class Parameters:
@@ -32,9 +34,13 @@ class ServerlessStack(core.Stack):
         table_name = prefix + parameters['DBTableName']
         partition_key = prefix + parameters['DBTablePartitionKey']
         sort_key = None if parameters['DBTableSortKey'] == '' else prefix + parameters['DBTableSortKey']
+        topic_name = prefix + parameters['SNSTopicName']
+        lambda_snstarget_name = prefix + 'snstarget'
 
         # Create S3 bucket
-        bucket = custom_s3(self, id=bucket_name, bucket_name=bucket_name, versioned=False)
-        apigateway = custom_apigateway(self, id=apigateway_name)
+        sns = custom_sns(self, topic_name = topic_name, display_name = topic_name)
+        lambda_snstarget = custom_lambda_snstarget(self, lambda_name = lambda_snstarget_name, source_topic = sns)
+        bucket = custom_s3(self, id=bucket_name, target_topic=sns, bucket_name=bucket_name, versioned=False)
         dbtable = custom_dynamodb(stack=self, table_name=table_name, partition_key=partition_key, sort_key=sort_key)
-
+        apigateway = custom_apigateway(self, id=apigateway_name)
+        

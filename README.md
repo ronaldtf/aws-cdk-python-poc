@@ -111,7 +111,7 @@ $ cdk bootstrap
 
 2. Run the deployment
 ```
-$ cdk deploy
+$ cdk deploy [--profile <profile-e.g.-cdk>]
 ```
 
 NOTE: You must execute ```cdk synth```  every time before doing the deployment in order to have the CloudFormation generated scripts updated.

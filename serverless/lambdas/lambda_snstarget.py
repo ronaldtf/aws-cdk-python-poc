@@ -1,3 +1,9 @@
+
+__author__ = 'Ronald T. Fernandez (Ronald Teijeira Fernandez)'
+__email__ = 'ronaldtfernandez@gmail.com'
+__version__ = '1.0'
+__date__ = 'September 2019'
+
 import boto3
 import os
 from botocore.exceptions import (
@@ -11,7 +17,7 @@ def handler(event, context):
     message = event.get('Records')[0].get('Sns').get('Message')
     message = json.loads(message)
     ref = message.get('Records')[0].get('s3')
-    operation = message.get('Records')[0].get('eventName') # ObjectCreated:Put / ObjectRemoved:Delete
+    operation = message.get('Records')[0].get('eventName') # ObjectCreated:* / ObjectRemoved:*
     
     bucket_name = ref.get('bucket').get('name')
     object_name = ref.get('object').get('key')
@@ -76,12 +82,12 @@ def handler(event, context):
             counter = response['Item'].get('counter')
         else:
             counter = 0
-    except ClientError as e:
+    except ClientError:
         counter = 0
 
     print('Counter before: ' + str(int(counter)))
     counter = int(counter)
-    if operation == 'ObjectCreated:Put':
+    if operation.startswith('ObjectCreated:'):
         counter = counter + 1
     else:
         counter = max(0, counter - 1)

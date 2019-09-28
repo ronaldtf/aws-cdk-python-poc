@@ -22,10 +22,10 @@ class custom_apigateway(aws_apigateway.RestApi):
         
         # Define lambdas to be integrated in API
         lambda1 = aws_lambda.Function(self, 'lambda1', code = aws_lambda.InlineCode(open('serverless/lambdas/lambda1.py', encoding="utf-8").read()), handler= 'index.handler', timeout = core.Duration.seconds(30), runtime = aws_lambda.Runtime.PYTHON_3_7, environment=[])
-        lambda1.Permission = aws_lambda.Permission(principal= aws_iam.ServicePrincipal('apigateway.amazonaws.com'), action='dynamodb:*') 
+        lambda1.add_to_role_policy(aws_iam.PolicyStatement(actions=['dynamodb:*'], effect = aws_iam.Effect.ALLOW, resources=['*']))
 
         lambda2 = aws_lambda.Function(self, 'lambda2', code = aws_lambda.InlineCode(open('serverless/lambdas/lambda2.py', encoding="utf-8").read()), handler= 'index.handler', timeout = core.Duration.seconds(30), runtime = aws_lambda.Runtime.PYTHON_3_7, environment=[])
-        lambda2.Permission = aws_lambda.Permission(principal= aws_iam.ServicePrincipal('apigateway.amazonaws.com'), action='dynamodb:*') 
+        lambda2.add_to_role_policy(aws_iam.PolicyStatement(actions=['dynamodb:*'], effect = aws_iam.Effect.ALLOW, resources=['*']))
 
         # Common API Gateway options
         integration_responses = [

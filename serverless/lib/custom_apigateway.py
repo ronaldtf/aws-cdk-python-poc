@@ -57,10 +57,13 @@ class custom_apigateway(aws_apigateway.RestApi):
         integration_get_count = aws_apigateway.LambdaIntegration(lambda_get_count, proxy=False, integration_responses=integration_responses, passthrough_behavior=aws_apigateway.PassthroughBehavior.NEVER, request_templates=request_templates)
         get_count.add_method('GET', integration_get_count, method_responses=method_responses)
         
-        # API GAteway Resource 2
-        res2 = self.root.add_resource('res2')
-        integration_res2 = aws_apigateway.LambdaIntegration(lambda2, proxy=False, integration_responses=integration_responses, passthrough_behavior=aws_apigateway.PassthroughBehavior.NEVER, request_templates=request_templates)
-        res2.add_method('GET', integration_res2, method_responses=method_responses)
+        # request_templates2={
+        #     "application/json": "{\"filename\": $util.escapeJavaScript($input.params('filename'))"
+        # }
+        # # API GAteway Resource 2
+        # res2 = self.root.add_resource('file')
+        # integration_res2 = aws_apigateway.LambdaIntegration(lambda2, proxy=False, integration_responses=integration_responses, passthrough_behavior=aws_apigateway.PassthroughBehavior.NEVER, request_templates=request_templates2, request_parameters = {"integration.request.querystring.filename" : "method.request.querystring.filename"})
+        # res2.add_method('DELETE', integration_res2, method_responses=method_responses)
 
         self.node.apply_aspect(api_gateway_restrictions(type(self)))
 

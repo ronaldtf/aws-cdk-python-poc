@@ -148,6 +148,7 @@ The relevant files for this project as the following:
 * `requirements.txt`: Dependencies needed for the project.
 * `setup.py`: It defines how the package is constructed .
 * `cdk.out/*`: When `cdk synth` is executed, CloudFormation templates are placed under this directory. Those files are used for deploying the insfrastrure with `cdk deploy` 
+* `architecture/*`: It contains architecture diagrams.
 * `serverless/*`: The project itself, where source code is placed.
     * `serverless/params/*`: Configuration file, where we define the infrastructure parameters
     * `serverless/lib/*`: Library files, i.e. custom constructors.

@@ -22,7 +22,13 @@ def handler(event, context):
     try:
         response = table.scan()
         data = response['Items']
+        dict = {}
+        for d in data:
+            bucket = d.get('bucket')
+            object = d.get('object')
+            value = d.get('counter')
+            dict[bucket + '/' + object] = value
 
-        return data
+        return dict
     except ClientError:
         pass

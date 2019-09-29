@@ -53,7 +53,7 @@ class custom_apigateway(aws_apigateway.RestApi):
         }
 
         # API Gateway Resource 1
-        get_count = self.root.add_resource('get_count')
+        get_count = self.root.add_resource('count')
         integration_get_count = aws_apigateway.LambdaIntegration(lambda_get_count, proxy=False, integration_responses=integration_responses, passthrough_behavior=aws_apigateway.PassthroughBehavior.NEVER, request_templates=request_templates)
         get_count.add_method('GET', integration_get_count, method_responses=method_responses)
         

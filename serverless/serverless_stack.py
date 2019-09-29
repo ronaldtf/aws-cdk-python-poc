@@ -32,14 +32,12 @@ class ServerlessStack(core.Stack):
         bucket_name = prefix + parameters['BucketName']
         apigateway_name = prefix + parameters['ApiGatewayName']
         table_name = prefix + parameters['DBTableName']
-        partition_key = prefix + parameters['DBTablePartitionKey']
-        sort_key = None if parameters['DBTableSortKey'] == '' else prefix + parameters['DBTableSortKey']
         topic_name = prefix + parameters['SNSTopicName']
         lambda_snstarget_name = prefix + 'snstarget'
 
         # Create S3 bucket
         sns = custom_sns(self, topic_name = topic_name, display_name = topic_name)
-        dbtable = custom_dynamodb(stack=self, table_name=table_name, partition_key=partition_key, sort_key=sort_key)
+        dbtable = custom_dynamodb(stack=self, table_name=table_name, partition_key='bucket', sort_key='object')
         lambda_snstarget = custom_lambda_snstarget(self, lambda_name = lambda_snstarget_name, source_topic = sns, table_name = table_name)
         bucket = custom_s3(self, id=bucket_name, target_topic=sns, bucket_name=bucket_name, versioned=True)
         apigateway = custom_apigateway(self, id=apigateway_name, table_name = table_name)

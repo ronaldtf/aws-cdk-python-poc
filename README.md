@@ -30,7 +30,7 @@ $ curl https://<api-id>.execute-api.<deployed-region>.amazonaws.com/prod/count
 
 where `<api-id>` is the API Gateway id, `<deployed-region>` is the region where the stack has been deployed.
 
-![alt text](https://github.com/ronaldtf/aws-cdk/serverless/architecture/poc.png "Use case architecture")
+![alt text](https://github.com/ronaldtf/aws-cdk/blob/master/architecture/poc.png "Use case architecture")
 
 ## Installation
 

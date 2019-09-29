@@ -17,6 +17,20 @@ The goal is define a simple infrastructure we can use in other projects as well 
 
 Even if we have opted for a serverless infrastructure, the project can be easily adapted to a non-serverless architecture. 
 
+## Use case
+The serverless application consists of counting the number of times an object is created and/or removed.
+
+The bucket which is monitored is the one one composed by the Prefix and BucketName, as specified in the params/`config.properties` file. You must upload and/or remove files to such bucket to detect changes.
+
+The result of the monitoring is got through an API Gateway call. The API Gateway url to be used is displayed after the stack is deployed with `cdk deploy`. We need to append the `count` suffix to such id and do a GET request. For instance:
+
+```
+$ curl https://<api-id>.execute-api.<deployed-region>.amazonaws.com/prod/count
+```
+
+where `<api-id>` is the API Gateway id, `<deployed-region>` is the region where the stack has been deployed.
+
+![alt text](https://github.com/ronaldtf/aws-cdk/serverless/architecture/poc.png "Use case architecture")
 
 ## Installation
 
@@ -138,4 +152,3 @@ The relevant files for this project as the following:
     * `serverless/params/*`: Configuration file, where we define the infrastructure parameters
     * `serverless/lib/*`: Library files, i.e. custom constructors.
     * `serverless/serverless_stack.py`: Main stack file where we define which resources to build.
-

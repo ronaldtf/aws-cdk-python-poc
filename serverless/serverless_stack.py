@@ -5,7 +5,6 @@ __date__ = 'September 2019'
 
 from aws_cdk import core
 from lib.custom_s3 import custom_s3
-from lib.custom_apigateway import custom_apigateway
 from lib.custom_dynamodb import custom_dynamodb
 
 ## This is a class to retrieve parameter values from configuration file
@@ -28,7 +27,6 @@ class ServerlessStack(core.Stack):
         parameters = Parameters.get_parameters()
         prefix = parameters['Prefix']
         bucket_name = prefix + parameters['BucketName']
-        apigateway_name = prefix + parameters['ApiGatewayName']
         table_name = prefix + parameters['DBTableName']
         partition_key = prefix + parameters['DBTablePartitionKey']
         sort_key = None if parameters['DBTableSortKey'] == '' else prefix + parameters['DBTableSortKey']
@@ -40,6 +38,5 @@ class ServerlessStack(core.Stack):
             allowed_methods=[]
         )
         
-        apigateway = custom_apigateway(self, id=apigateway_name)
         dbtable = custom_dynamodb(stack=self, table_name=table_name, partition_key=partition_key, sort_key=sort_key)
 

@@ -1,6 +1,0 @@
-README.md
-setup.py
-serverless/serverless.egg-info/PKG-INFO
-serverless/serverless.egg-info/SOURCES.txt
-serverless/serverless.egg-info/dependency_links.txt
-serverless/serverless.egg-info/top_level.txt

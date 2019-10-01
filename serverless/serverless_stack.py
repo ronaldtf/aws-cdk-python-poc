@@ -3,7 +3,7 @@ __email__ = 'ronaldtfernandez@gmail.com'
 __version__ = '1.0'
 __date__ = 'September 2019'
 
-from aws_cdk import core
+from aws_cdk import core, aws_s3
 from lib.custom_s3 import custom_s3
 from lib.custom_dynamodb import custom_dynamodb
 
@@ -34,8 +34,8 @@ class ServerlessStack(core.Stack):
         # Create S3 bucket
         bucket = custom_s3(self, id=bucket_name, bucket_name=bucket_name, versioned=False)
         bucket.add_cors_rule(
-            allowed_origins=[],
-            allowed_methods=[]
+            allowed_origins=['*'],
+            allowed_methods=[aws_s3.HttpMethods.GET]
         )
         
         dbtable = custom_dynamodb(stack=self, table_name=table_name, partition_key=partition_key, sort_key=sort_key)

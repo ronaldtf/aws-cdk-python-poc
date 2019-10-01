@@ -1,5 +1,5 @@
 import jsii
-from aws_cdk import core
+from aws_cdk import core, aws_s3
 from custom_s3 import MyBucketDefinition
 
 def getProperties():
@@ -18,6 +18,6 @@ class ServerlessStack(core.Stack):
         bucket = MyBucketDefinition(self, id=bucket_name, bucket_name=bucket_name, versioned=False)
         bucket.add_cors_rule(
             allowed_origins=['*'],
-            allowed_methods=[]
+            allowed_methods=[aws_s3.HttpMethods.GET]
         )
 

@@ -24,7 +24,6 @@ The serverless application consists of counting the number of times an object is
 The bucket which is monitored is the one one composed by the Prefix and BucketName, as specified in the `params/config.properties` file. You must upload and/or remove files to such bucket to detect changes.
 
 The result of the monitoring is got through an API Gateway call. The API Gateway url to be used is displayed after the stack is deployed with `cdk deploy`. We need to append the `count` suffix to such id and do a GET request. For instance:
-
 ```
 $ curl https://<api-id>.execute-api.<deployed-region>.amazonaws.com/prod/count
 ```

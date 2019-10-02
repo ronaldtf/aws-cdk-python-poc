@@ -135,8 +135,14 @@ $ cdk bootstrap
 ```
 $ cdk deploy [--profile <profile-e.g.-cdk>]
 ```
+NOTE: You do not need to execute ```cdk synth```  every time before doing the deployment in order to have the CloudFormation generated scripts updated because this is already done in the ```app.py``` file:
+```python
+if __name__ == "__main__":    
+    app = core.App()
+    ServerlessStack(app, "serverless")
+    app.synth()
+```
 
-NOTE: You must execute ```cdk synth```  every time before doing the deployment in order to have the CloudFormation generated scripts updated.
 
 ### Other useful commands
 

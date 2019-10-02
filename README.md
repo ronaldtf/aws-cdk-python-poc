@@ -37,6 +37,13 @@ where `<api-id>` is the API Gateway id, `<deployed-region>` is the region where 
 
 We show below not only the commands needed to deploy this project but also additional instructions to start a project from stratch.
 
+### Install the AWS CDK CLI
+
+Following the instructions [from here](https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html#getting_started_install), run the following command to install the AWS CDk client
+```
+$ npm install -g aws-cdk
+```
+
 ### Create a project from scratch
 In order to create a project from scratch, use the following command:
 ```

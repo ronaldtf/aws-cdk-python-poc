@@ -12,6 +12,7 @@ In this project we have implemented a project that uses AWS CDK to deploy a simp
 * Lambda
 * DynamoDB
 * S3
+* SNS
 
 The goal is define a simple infrastructure we can use in other projects as well as introduce specific aspects (which might not necessarily be needed in this project but might be useful in other more complex projects or with a specific purpose). 
 

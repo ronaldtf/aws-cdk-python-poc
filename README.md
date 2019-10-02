@@ -39,7 +39,7 @@ We show below not only the commands needed to deploy this project but also addit
 
 ### Install the AWS CDK CLI
 
-Following the instructions [from here](https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html#getting_started_install), run the following command to install the AWS CDk client
+Following the instructions from the [CDK starting guide](https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html#getting_started_install), run the following command to install the AWS CDK client
 ```
 $ npm install -g aws-cdk
 ```

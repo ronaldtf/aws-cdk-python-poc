@@ -10,7 +10,8 @@ from aws_cdk import aws_iam
 
 import typing
 
-class custom_sns(aws_sns.Topic):
+# Define a topic with a defined specific policy
+class CustomSNS(aws_sns.Topic):
     def __init__(self, scope: core.Construct, display_name: str, topic_name: str):
         super().__init__(scope=scope, id=topic_name, display_name = display_name, topic_name = topic_name)
 

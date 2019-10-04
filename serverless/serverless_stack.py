@@ -4,11 +4,11 @@ __version__ = '1.0'
 __date__ = 'September 2019'
 
 from aws_cdk import core
-from lib.custom_s3 import custom_s3
-from lib.custom_apigateway import custom_apigateway
-from lib.custom_dynamodb import custom_dynamodb
-from lib.custom_sns import custom_sns
-from lib.custom_lambda_snstarget import custom_lambda_snstarget
+from lib.custom_s3 import CustomS3
+from lib.custom_apigateway import CustomAPIGateway
+from lib.custom_dynamodb import CustomDynamoDB
+from lib.custom_sns import CustomSNS
+from lib.custom_lambda_snstarget import CustomLambdaSNStarget
 
 ## This is a class to retrieve parameter values from configuration file
 class Parameters:
@@ -20,13 +20,13 @@ class Parameters:
         return params
 
 
-## This is the main class when generating the CloudFormation templates
+## This is the main class used to generate the CloudFormation templates
 class ServerlessStack(core.Stack):
 
     def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
-        # Get parameters
+        # Get parameters to build the objects
         parameters = Parameters.get_parameters()
         prefix = parameters['Prefix']
         bucket_name = prefix + parameters['BucketName']
@@ -35,10 +35,14 @@ class ServerlessStack(core.Stack):
         topic_name = prefix + parameters['SNSTopicName']
         lambda_snstarget_name = prefix + 'snstarget'
 
-        # Create S3 bucket
-        sns = custom_sns(self, topic_name = topic_name, display_name = topic_name)
-        dbtable = custom_dynamodb(stack=self, table_name=table_name, partition_key='bucket', sort_key='object')
-        lambda_snstarget = custom_lambda_snstarget(self, lambda_name = lambda_snstarget_name, source_topic = sns, table_name = table_name)
-        bucket = custom_s3(self, id=bucket_name, target_topic=sns, bucket_name=bucket_name, versioned=True)
-        apigateway = custom_apigateway(self, id=apigateway_name, table_name = table_name)
+        # Create a DynamoDB table
+        CustomDynamoDB(stack=self, table_name=table_name, partition_key='bucket', sort_key='object')
+        # Create a SNS topic
+        sns = CustomSNS(self, topic_name = topic_name, display_name = topic_name)
+        # Create a S3 bucket and set the topic as event target
+        CustomS3(self, id=bucket_name, target_topic=sns, bucket_name=bucket_name, versioned=True)
+        # Create a Lambda which is triggered with the SNS topic
+        CustomLambdaSNStarget(self, lambda_name = lambda_snstarget_name, source_topic = sns, table_name = table_name)
+        # Create an API Gateway to get the status of the DynamoDB
+        CustomAPIGateway(self, id=apigateway_name, table_name = table_name)
         

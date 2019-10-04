@@ -8,6 +8,7 @@ __date__ = 'September 2019'
 from aws_cdk import core
 from serverless.serverless_stack import ServerlessStack
 
+# This is the main application
 if __name__ == "__main__":    
     app = core.App()
     ServerlessStack(app, "serverless")

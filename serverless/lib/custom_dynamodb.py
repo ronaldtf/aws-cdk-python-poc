@@ -10,11 +10,10 @@ from aws_cdk import core
 import typing
 
 import typing
-# from aws_cdk.core import IAspect, IConstruct
-# import jsii
 
-# This class does not inherit from the CDK library DynamoDB. Instead, it calls the constructor with the right parameters
-class custom_dynamodb:
+# This class does not inherit from the CDK library DynamoDB. 
+# Instead, it calls the constructor with the right parameters
+class CustomDynamoDB:
     def __init__(self, stack: core.Stack, table_name: str, partition_key: str, sort_key=None):
         items_table = aws_dynamodb.Table(
             stack, 
